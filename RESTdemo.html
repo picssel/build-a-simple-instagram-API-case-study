@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="author" content="Jose Francisco Diaz / picssel.com" />
+<title>RESTinstagram DEMO</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css' />
+<link href="RESTdemo.css" rel="stylesheet" type="text/css" />
+<link href='http://cdn.jsdelivr.net/mediaelement/2.16.3/mediaelementplayer.css' rel="stylesheet" type="text/css" />
+<link href='http://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css' rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="section logo">
+  <div class="innerSection"><img src="http://www.picssel.com/logo224x60.png" alt="picssel.com" /></div>
+</div>
+<div class="section description c638CAE white">
+  <div class="innerSection">
+    <h3>Request JSON information via REST API</h3>
+    <h4>Instructions :</h4>
+    <p>+ Enter an Instagram user URL or name like <span></span><i>http://instagram.com/instagram</i><span></span> or <span></span><i>instagram</i><span></span><br />+ or Enter an Instagram media URL or shortcode like <span></span><i>http://instagram.com/p/wIGQdCuHD2</i><span></span> or <span></span><i>wIGQdCuHD2</i><span></span></p>
+  </div>
+  <div class="section error cF23695 white">
+    <div class="innerSection"></div>
+  </div>
+</div>
+<div class="section form">
+  <div class="innerSection cf">
+    <form id="getData">
+    <div class="left">
+      <h3>Request Data</h3>
+      <div class="fieldWrapper cf">
+        <label for="iuserName">Instagram User</label>
+        <input type="text" id="iuserName" name="iuserName" class="param iuserName" tabindex="1" />
+      </div>
+      <div class="fieldWrapper cf"><span>- <strong>or</strong> -</span></div>
+      <div class="fieldWrapper cf">
+        <label for="mediaID">Instagram Media</label>
+        <input type="text" id="mediaID" name="mediaID" class="param mediaID" tabindex="1" />
+      </div>
+    </div>
+    <div class="left options cf">
+      <h3>Options</h3>
+      <div class="fieldWrapper cf">
+        <input type="checkbox" id="showDetails" name="showDetails" tabindex="1" />
+        <label class="check" for="showDetails">Show detailed information</label>
+      </div>
+      <div class="fieldWrapper cf forUsersOnly">
+        <input type="checkbox" id="showMedia" name="showMedia" tabindex="1" />
+        <label class="check" for="showMedia">Show recent media (4) - public profiles</label>
+      </div>
+      <div class="fieldWrapper cf forMediaOnly">
+        <input type="checkbox" id="generateCode" name="generateCode" tabindex="1" />
+        <label class="check" for="generateCode">Generate HTML5 video code - media</label>
+      </div>
+    </div>
+    <div class="left go cf">
+      <input id="submit" type="submit" value="go" tabindex="1" />
+      <div class="loading"><img src="loading.gif" alt="loading" /></div>
+    </div>
+    </form>
+  </div>
+</div>
+<div class="section">
+  <div class="innerSection tables">
+    <div class="userinfo cf">
+      <h4>User Information</h4>
+      <table id="userinfo">
+        <tbody>
+          <tr>
+            <td class="tableImage">
+              <table id="tableProfilePic">
+                <thead>
+                  <tr><th class="profilePic">Profile Picture</th></tr>
+                </thead>
+                <tbody>
+                  <!--tr><td class="profilePic">pic</td></tr-->
+                </tbody>
+              </table>
+            </td>
+            <td class="tableData">
+              <table id="tableUserData">
+                <thead>
+                  <tr>
+                    <th class="infoType">Property</th>
+                    <th class="infoData">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!--tr>
+                    <td class="infoType">some Property</td>
+                    <td class="infoData">some Value</td>
+                  </tr-->
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mediainfo cf">
+      <h4>Media Information</h4>
+      <table id="mediainfo">
+        <tbody>
+          <tr>
+            <td class="tableImage">
+              <table id="tableImage">
+                <thead>
+                  <tr><th class="profilePic">Thumbnail</th></tr>
+                </thead>
+                <tbody>
+                  <!--tr><td class="profilePic">pic</td></tr-->
+                </tbody>
+              </table>
+            </td>
+            <td class="tableData">
+              <table id="tableMediaData">
+                <thead>
+                  <tr>
+                    <th class="infoType">Property</th>
+                    <th class="infoData">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!--tr>
+                    <td class="infoType">some Property</td>
+                    <td class="infoData">some Value</td>
+                  </tr-->
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div id="log"></div>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>window.jQuery || document.write("<script src='{local path}/scripts/jquery-1.11.2.min.js.js'>\x3C/script>")</script>
+<script>
+var version = new Date().getTime(), demojs = document.createElement('script');
+demojs.setAttribute('src', './RESTdemo.js?ver=' + version);
+document.body.appendChild(demojs);
+</script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="http://cdn.jsdelivr.net/mediaelement/2.16.3/mediaelement-and-player.min.js"></script>
+</body>
+</html>

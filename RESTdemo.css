@@ -1,0 +1,73 @@
+/*
+ * Instagram's proxy API - styles for demo page
+ * By Francisco Diaz :: picssel.com
+ * December 2014
+ */
+.cf:after{visibility:hidden;  display:block;  content:"";  clear:both;  height:0}
+* html .cf{zoom:1}/* IE6 */
+*:first-child+html .cf{zoom:1}/* IE7 */
+*{margin:0; padding:0; box-sizing:border-box}
+html{overflow-y:scroll}
+body{line-height:1.2em; font-size:19px; font-family:'Source Sans Pro',sans-serif}
+h3{padding:10px 0}
+h4{padding:5px 0}
+p {font-size: 0.95em;line-height: 1.5em;padding: 5px 0 10px;}
+p i {font-style: normal; font-family: consolas,courier,monospace,sans-serif; font-size: 0.7em; border: solid 1px #f8f8f8; padding: 2px 5px; margin: 0 5px;}
+a {text-decoration: none; outline: 0 none;}
+label{display:block; font-size:0.8em}
+input[type="text"] {border: 1px solid #e2e2e2; color: #5f696d; font-size: 0.8em; margin: 5px 0; max-width: 350px; padding: 10px 8px; width: 100%;}
+table{ font-family:consolas,courier,monospace,sans-serif;  table-layout:fixed;  text-align:left;  width:100%;  vertical-align:top;  border:0 none;  border-spacing:0;  border-collapse:collapse;  padding:0; font-size: 0.9em;}
+table .img {margin: 5px 10px 2px 0; max-width:150px; width: 100%; font-size: 0.85em; line-height:1.3em;}
+th{background-color:#FFC629; vertical-align:bottom}
+td{vertical-align:top}
+i {white-space: nowrap;}
+#userinfo, #mediainfo{ font-size:0.75em;}
+#submit{ cursor:pointer;  padding:5px 45px}
+#getData input[type="checkbox"]{ left:0;  margin:0 !important;  position:absolute;  top:10%;  visibility:hidden}
+#getData .check{ cursor:pointer;  line-height:1em;  padding-left:18px}
+#getData .check:before{ content:"\f096";  font-family:"FontAwesome";  left:0;  position:absolute}
+#getData input[type="checkbox"]:checked+.check:before{ content:"\f046";  font-family:"FontAwesome"}
+.tableData table tr:nth-child(even){background-color:#f2f2f2}
+.section{ width:100%;  display:block; position: relative; min-width:420px;}
+.innerSection{ width:95%;  max-width:960px;  min-width:280px;margin:0 auto;}
+.innerSection.tables{margin-bottom: 20px;}
+.description {min-height: 100px; font-size:17px;}
+.error {position: absolute; bottom:0; left:0; display: none; opacity:0.9; font-size:0.9em;}
+.userinfo, .mediainfo {display:none;}
+.white{color:#fff}
+.c638CAE{background-color:#638CAE} /* blue */
+.cF23695{background-color:#F23695} /* pink */
+.cA4C370{background-color:#A4C370} /* green */
+.left{float:left}
+.logo {margin: 5px 0;min-height: 70px;}
+.tableImage{width:29%}
+.tableData{width:70%}
+.profilePic{width:100%}
+.profilePic img {max-width:150px;}
+.infoType{width:25%; text-align:right; padding-right:4%; font-weight: bold;}
+.infoData{width:75%}
+.form .left{width:45%; margin:5px 0 15px}
+.fieldWrapper{position:relative; min-height: 1.3em;}
+.submit{width:100%}
+.showDetailsSpan{font-size:0.95em; color:#444}
+.forUsersOnly, .forMediaOnly{display:none}
+.forUsersOnly.visible{display:block}
+.go {position: relative; overflow: visible;}
+.loading {display: block; height: 32px;left: 40px;position: absolute;top: 60px;width: 32px; display: none;}
+.consolas {font-family: consolas,courier,monospace,sans-serif; font-size: 0.8em;}
+.options {min-height: 140px;}
+.options .fieldWrapper{margin-top: 5px;}
+.generatedHTML {color: #5f696d; font-family: consolas,courier,monospace,sans-serif; font-size: 0.9em; margin-top: 2px; min-height: 85px; min-width: 100%; max-width: 100%; max-height: 100px; cursor: text;}
+/* media queries */
+@media only screen and (min-width:100px) and (max-width:900px){
+  .infoType {width: 39%;}
+  .profilePic img {max-width: 95%;}
+  .form .left {margin: 5px 3% 15px 0;width: 46%;}
+}
+@media only screen and (min-width:600px) and (max-width:800px){
+  .tableImage {width: 23%;}
+}
+@media only screen and (min-width:100px) and (max-width:600px){
+  .tableImage {display: none;}
+  .infoType {width: 39%;}
+}
