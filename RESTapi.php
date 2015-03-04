@@ -4,7 +4,7 @@
  * reads Instagram pages and gets embedded data,
  * then returns it as json or jsonp.
  * By Francisco Diaz :: picssel.com
- * December 2014
+ * Revision March 2015
  */
 /***** get request origin and set domain restrictions *****/
 $http_origin = $_SERVER['HTTP_ORIGIN'];
@@ -23,12 +23,6 @@ if(in_array( $http_origin, $domains_allowed )){
 }
 
 /***** functions *****/
-// clean up file contents
-function cleanup_data($data){
-    $data = trim($data);
-    $data = strip_tags($data);
-    return $data;
-};
 // sanitize input
 function sanitize_input($input){
     $input = trim($input);
@@ -42,7 +36,9 @@ function process_data($dataFile, $requestType){
     $data_length = strlen($dataFile);
     if( $data_length > 0 ){
         $start_position = strpos( $dataFile ,'{"static_root"' ); // start position
-        $trimmed = trim( substr($dataFile, $start_position) ); // trim content
+        $trimmed_before = trim( substr($dataFile, $start_position) ); // trim preceding content
+        $end_position = strpos( $trimmed_before, '</script>'); // end position
+        $trimmed = trim( substr( $trimmed_before, 0, $end_position) ); // trim content
         $jsondata = substr( $trimmed, 0, -1); // remove extra trailing ";"
         header("HTTP/1.0 200 OK");
         // JSONP response
@@ -68,17 +64,25 @@ function process_data($dataFile, $requestType){
 $user  = sanitize_input( $_GET['user'] );  // expects something like "instagram" (username)
 $media = sanitize_input( $_GET['media'] ); // expects something like "mOFsFhAp4f" (shortcode)
 
+/***** set context *****/
+$context = stream_context_create(array(
+    'http' => array(
+        'timeout' => 10 // in seconds
+        )
+    )
+);
+
 /***** validate request type and return response *****/
 // user, including last 20 media posts
 if( !empty($user) && empty($media) ){
     $requestType = "user";
-    $dataFile = cleanup_data( @ file_get_contents("http://instagram.com/".$user) );
+    $dataFile = @ file_get_contents("http://instagram.com/".$user,  NULL, $context);
     echo process_data($dataFile, $requestType);
 }
 // media
 elseif( empty($user) && !empty($media) ){
     $requestType = "media";
-    $dataFile = cleanup_data( @ file_get_contents("http://instagram.com/p/".$media) );
+    $dataFile = @ file_get_contents("http://instagram.com/p/".$media, NULL, $context);
     echo process_data($dataFile, $requestType);
 }
 // invalid : two or more parameters were passed

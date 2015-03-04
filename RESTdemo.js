@@ -1,10 +1,9 @@
 /*
  * Instagram's proxy API - demo web application scripts.
  * By Francisco Diaz :: picssel.com
- * December 2014
+ * Rev: March 2015
  */
-;
-var rest = "./RESTapi.php"; // API's path
+;var rest = "./RESTapi.php"; // API's path
 var dataRequest = {};
 // process data request - call API
 function processRequest(dataRequest) {
@@ -71,7 +70,7 @@ function processUserData(dataRequest, response) {
                 var _media = {};
                 _media.type = media[i].type != null ? media[i].type : "unavailable";
                 _media.link = media[i].link != null ? media[i].link : "";
-                _media.shortcode = _media.link.substring(23, _media.link.length - 1);
+                _media.shortcode = _media.link.substring(24, _media.link.length - 1);
                 _media.location = media[i].location != null ? (media[i].location.name != null ? media[i].location.name : "unavailable") : "unavailable";
                 _media.locationmap = "";
                 if (media[i].location != null) {
@@ -99,7 +98,7 @@ function processUserData(dataRequest, response) {
 // process media data
 function processMediaData(dataRequest, response) {
     var media = response.entry_data.DesktopPPage[0].media;
-    jQuery("#tableImage").find("tbody").append('<tr><td class="profilePic"><div class="img"><img src="' + media.display_src.replace("_n.jpg", "_s.jpg") + '" alt="media thumbnail" /></div></td></tr>');
+    jQuery("#tableImage").find("tbody").append('<tr><td class="profilePic"><div class="img"><img style="max-width: 150px;" src="' + media.display_src + '" alt="media thumbnail" /></div></td></tr>');
     var _basic = {}, _detailed = {};
     _basic.type = media.is_video ? "video" : "image";
     _basic.user_name = media.owner.username;
@@ -112,10 +111,6 @@ function processMediaData(dataRequest, response) {
     _basic.date = new Date(1000 * media.date).toString();
     _detailed.media_ID = media.id;
     _detailed.is_user_private = media.owner.is_private ? "yes" : "no";
-    var srcThumb = media.display_src.indexOf("_n.jpg") > -1 ? media.display_src.replace("_n.jpg", "_s.jpg") : (media.display_src.indexOf("_7.jpg") > -1 ? media.display_src.replace("_7.jpg", "_5.jpg") : media.display_src);
-    _detailed.thumb_150x150 = '<a href="' + srcThumb + '" target="_blank">' + srcThumb + '</a>';
-    var srcLow = media.display_src.indexOf("_n.jpg") > -1 ? media.display_src.replace("_n.jpg", "_a.jpg") : (media.display_src.indexOf("_7.jpg") > -1 ? media.display_src.replace("_7.jpg", "_6.jpg") : media.display_src);
-    _detailed.low_306x306 = '<a href="' + srcLow + '" target="_blank">' + srcLow + '</a>';
     _detailed.high_640x640 = '<a href="' + media.display_src + '" target="_blank">' + media.display_src + '</a>';
     _detailed.country_code = response.country_code;
     // add basic info rows
@@ -224,8 +219,8 @@ jQuery(document).ready(function () {
         } else if (jQuery("#iuserName").val() != "") {
             dataRequest.type = "user";
             var username = jQuery("#iuserName").val();
-            if (username.indexOf("http://instagram.com/") > -1) {
-                username = jQuery("#iuserName").val().split("http://instagram.com/")[1];
+            if (username.indexOf("//instagram.com/") > -1) {
+                username = jQuery("#iuserName").val().split("//instagram.com/")[1];
                 username = username.indexOf("/") > -1 ? username.split("/")[0] : username;
             }
             dataRequest.param = username;
@@ -235,8 +230,8 @@ jQuery(document).ready(function () {
         } else {
             dataRequest.type = "media";
             var shortcode = jQuery("#mediaID").val();
-            if (shortcode.indexOf("http://instagram.com/p/") > -1) {
-                shortcode = jQuery("#mediaID").val().split("http://instagram.com/p/")[1];
+            if (shortcode.indexOf("//instagram.com/p/") > -1) {
+                shortcode = jQuery("#mediaID").val().split("//instagram.com/p/")[1];
                 shortcode = shortcode.indexOf("/") > -1 ? shortcode.split("/")[0] : shortcode;
             }
             dataRequest.param = shortcode;
